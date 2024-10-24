@@ -1,0 +1,43 @@
+// 1. Visitor Counter using LocalStorage
+window.onload = function() {
+    // Check if visitor count exists in local storage
+    if (localStorage.getItem('visitCount')) {
+        let visitCount = localStorage.getItem('visitCount');
+        visitCount++;
+        localStorage.setItem('visitCount', visitCount);
+    } else {
+        localStorage.setItem('visitCount', 1);  // Initialize visit count
+    }
+    
+    let countDisplay = document.createElement('p');
+    countDisplay.textContent = `Visitors: ${localStorage.getItem('visitCount')}`;
+    document.body.appendChild(countDisplay);  // Show visitor count at the bottom
+};
+
+// 2. Resume Download Counter
+document.querySelector("#resume a").addEventListener('click', function() {
+    if (localStorage.getItem('resumeDownloadCount')) {
+        let resumeCount = localStorage.getItem('resumeDownloadCount');
+        resumeCount++;
+        localStorage.setItem('resumeDownloadCount', resumeCount);
+    } else {
+        localStorage.setItem('resumeDownloadCount', 1);  // Initialize download count
+    }
+    
+    alert(`Your resume has been downloaded ${localStorage.getItem('resumeDownloadCount')} times!`);
+});
+
+// 3. Smooth Scrolling for navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// 4. Simple Alert for Contact Form (if added)
+function submitContactForm() {
+    alert("Thank you for getting in touch! I will get back to you soon.");
+}
